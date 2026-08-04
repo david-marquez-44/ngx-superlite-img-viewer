@@ -1,0 +1,12 @@
+<div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
+  <button type="button" (click)="previous()">
+    <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
+  </button>
+  <img class="superlite-viewer__img" [src]="images()[currentIndex()]" alt="">
+  <button type="button" (click)="next()">
+    <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
+  </button>
+  <h3>Total: {{ images().length }}</h3>
+  <h3>CurrentIndex: {{ currentIndex() }}</h3>
+</div>
+
