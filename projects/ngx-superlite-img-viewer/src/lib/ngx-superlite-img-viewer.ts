@@ -9,21 +9,25 @@ import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 })
 export class NgxSuperliteImgViewer {
   images = input.required<string[]>();
+  imageIndex = input.required<number>();
   imageslength = computed<number>(() => this.images().length)
-
   showDownloadButton = input<boolean>(true);
-  currentIndex = signal<number>(0);
 
+  currentIndexIntern = signal(0);
   closed = output<void>();
 
+  ngAfterViewInit() {
+    this.currentIndexIntern.set(this.imageIndex())
+  }
+
   next() {
-    if (this.currentIndex() < (this.imageslength() - 1)) this.currentIndex.set(this.currentIndex() + 1);
-    else this.currentIndex.set(0)
+    if (this.currentIndexIntern() < (this.imageslength() - 1)) this.currentIndexIntern.set(this.currentIndexIntern() + 1);
+    else this.currentIndexIntern.set(0)
   }
 
   previous() {
-    if (this.currentIndex() > 0) this.currentIndex.set(this.currentIndex() - 1)
-    else this.currentIndex.set(this.imageslength() - 1)
+    if (this.currentIndexIntern() > 0) this.currentIndexIntern.set(this.currentIndexIntern() - 1)
+    else this.currentIndexIntern.set(this.imageslength() - 1)
   }
 
 }
