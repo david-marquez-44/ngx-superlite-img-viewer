@@ -8,10 +8,10 @@
 }
 
 .superlite-viewer {
-  width: 60vw;
-  height: 60vh;
+  width: 80vw;
+  height: 80vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
   justify-content: center;
   align-items: center;
@@ -24,12 +24,27 @@
   object-fit: contain;
 }
 
-.superlite-viewer__navigate-btn {
-  height: 90px;
-  width: 70px;
+.superlite-viewer__controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.superlite-viewer__control-btn {
+  border: none;
   color: white;
   background-color: transparent;
-  border: 2px white solid;
-  border-radius: 6px;
+  width: 50px;
+}
+
+.superlite-viewer__vertical-line {
+  display: inline-block;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0 10px;
+  height: 80%;
 }
 

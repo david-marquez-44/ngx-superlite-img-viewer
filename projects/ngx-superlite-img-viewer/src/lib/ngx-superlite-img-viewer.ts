@@ -1,4 +1,4 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 
 @Component({
@@ -9,17 +9,14 @@ import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 })
 export class NgxSuperliteImgViewer {
   images = input.required<string[]>();
-  imageIndex = input.required<number>();
+  imageIndex = input<number>(0);
   imageslength = computed<number>(() => this.images().length)
-  showDownloadButton = input<boolean>(true);
-
+  showDownloadButton = input<boolean>(true); // No usado aun
   currentIndexIntern = signal(0);
-  closed = output<void>();
+  syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
+  currentImage = computed(() => this.images()[this.currentIndexIntern()]);
 
-  ngAfterViewInit() {
-    debugger
-    this.currentIndexIntern.set(this.imageIndex())
-  }
+  closed = output<void>();
 
   next() {
     if (this.currentIndexIntern() < (this.imageslength() - 1)) this.currentIndexIntern.set(this.currentIndexIntern() + 1);
@@ -31,4 +28,7 @@ export class NgxSuperliteImgViewer {
     else this.currentIndexIntern.set(this.imageslength() - 1)
   }
 
+  onClosed() {
+    this.closed.emit();
+  }
 }

@@ -1,12 +1,29 @@
 <div class="superlite-viewer">
-  <button type="button" (click)="previous()" class="superlite-viewer__navigate-btn">
-    <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
-  </button>
-  <img class="superlite-viewer__img" [src]="images()[currentIndexIntern()]" alt="">
-  <button type="button" (click)="next()" class="superlite-viewer__navigate-btn">
-    <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
-  </button>
-</div>
 
-<!-- <h3>Total: {{ images().length }}</h3>
-<h3>CurrentIndex: {{ currentIndexIntern() }}</h3> -->
+  <img class="superlite-viewer__img" [src]="currentImage()" alt="">
+
+  <div class="superlite-viewer__controls">
+    <button type="button" (click)="previous()" class="superlite-viewer__control-btn">
+      <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
+    </button>
+
+    <span class="superlite-viewer__vertical-line"></span>
+
+    <button type="button" (click)="next()" class="superlite-viewer__control-btn">
+      <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
+    </button>
+
+    <span class="superlite-viewer__vertical-line"></span>
+
+    <button type="button" class="superlite-viewer__control-btn">
+      <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
+    </button>
+
+    <span class="superlite-viewer__vertical-line"></span>
+
+    <button type="button" (click)="onClosed()" class="superlite-viewer__control-btn">
+      <ngx-sliv-icon iconName="close"></ngx-sliv-icon>
+    </button>
+  </div>
+
+</div>

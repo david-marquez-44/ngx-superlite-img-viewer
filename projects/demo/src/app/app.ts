@@ -21,8 +21,12 @@ export class App {
 
   ngOnInit() {
     for (let i = 0; i < 101; i++) {
-      this.imgArray.push(`https://picsum.photos/id/${i}/200/300`);
+      this.imgArray.push(`https://picsum.photos/id/${i}/1000/1000`);
     }
+  }
+
+  closeViewer() {
+    this.isOpenViewer.set(false);
   }
 
 }
