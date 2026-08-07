@@ -17,6 +17,7 @@ export class NgxSuperliteImgViewer {
   closed = output<void>();
 
   ngAfterViewInit() {
+    debugger
     this.currentIndexIntern.set(this.imageIndex())
   }
 
