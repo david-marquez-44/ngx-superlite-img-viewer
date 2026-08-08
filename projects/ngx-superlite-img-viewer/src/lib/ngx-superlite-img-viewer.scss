@@ -1,7 +1,9 @@
 :host {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
   z-index: 20000;
@@ -26,7 +28,6 @@
 
 .superlite-viewer__controls {
   display: flex;
-  gap: 20px;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -35,16 +36,18 @@
 }
 
 .superlite-viewer__control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   color: white;
   background-color: transparent;
-  width: 50px;
 }
 
 .superlite-viewer__vertical-line {
   display: inline-block;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 0 10px;
+  margin: 0 20px;
   height: 80%;
 }
 

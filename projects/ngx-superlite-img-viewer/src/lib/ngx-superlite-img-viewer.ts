@@ -11,11 +11,12 @@ export class NgxSuperliteImgViewer {
   images = input.required<string[]>();
   imageIndex = input<number>(0);
   imageslength = computed<number>(() => this.images().length)
-  showDownloadButton = input<boolean>(true); // No usado aun
+  showDownloadButton = input<boolean>(true);
   currentIndexIntern = signal(0);
   syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
   currentImage = computed(() => this.images()[this.currentIndexIntern()]);
   imageAlt = computed(() => `Imagen ${this.currentIndexIntern()} de ${this.imageslength()}`);
+  hasMultiple = computed(() => this.imageslength() > 1);
 
   closed = output<void>();
 
