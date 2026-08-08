@@ -15,6 +15,7 @@ export class NgxSuperliteImgViewer {
   currentIndexIntern = signal(0);
   syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
   currentImage = computed(() => this.images()[this.currentIndexIntern()]);
+  imageAlt = computed(() => `Imagen ${this.currentIndexIntern()} de ${this.imageslength()}`);
 
   closed = output<void>();
 

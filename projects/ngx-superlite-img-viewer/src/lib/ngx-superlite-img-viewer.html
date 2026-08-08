@@ -1,6 +1,6 @@
 <div class="superlite-viewer">
 
-  <img class="superlite-viewer__img" [src]="currentImage()" alt="">
+  <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
 
   <div class="superlite-viewer__controls">
     <button type="button" (click)="previous()" class="superlite-viewer__control-btn">
