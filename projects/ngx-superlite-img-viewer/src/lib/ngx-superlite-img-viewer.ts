@@ -1,5 +1,6 @@
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ngx-superlite-img-viewer',
@@ -8,6 +9,9 @@ import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
   styleUrl: './ngx-superlite-img-viewer.scss',
 })
 export class NgxSuperliteImgViewer {
+
+  private platformId = inject(PLATFORM_ID);
+
   images = input.required<string[]>();
   imageIndex = input<number>(0);
   imageslength = computed<number>(() => this.images().length)
@@ -28,6 +32,22 @@ export class NgxSuperliteImgViewer {
   previous() {
     if (this.currentIndexIntern() > 0) this.currentIndexIntern.set(this.currentIndexIntern() - 1)
     else this.currentIndexIntern.set(this.imageslength() - 1)
+  }
+
+  download() {
+    if (isPlatformBrowser(this.platformId)) {
+      let currentImage = this.currentImage();
+      if (window.location.origin == new URL(currentImage).origin) {
+        let a = document.createElement('a');
+        document.appendChild(a);
+        a.setAttribute('href', currentImage);
+        a.setAttribute('download', this.imageAlt());
+        a.click();
+        document.removeChild(a);
+      } else {
+
+      }
+    }
   }
 
   onClosed() {

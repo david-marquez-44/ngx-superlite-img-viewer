@@ -18,7 +18,7 @@
     }
 
     @if(showDownloadButton()) {
-      <button type="button" class="superlite-viewer__control-btn">
+      <button type="button" (click)="download()" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
       </button>
 

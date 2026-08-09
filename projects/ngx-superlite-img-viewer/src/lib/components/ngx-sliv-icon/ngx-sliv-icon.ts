@@ -6,7 +6,7 @@ import { Component, input, output } from '@angular/core';
     svg {
       display: flex;
       justify-content: center;
-      aling-items: center;
+      align-items: center;
       cursor: pointer;
     }
   `,
