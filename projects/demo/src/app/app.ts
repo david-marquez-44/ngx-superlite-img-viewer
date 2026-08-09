@@ -21,7 +21,7 @@ export class App {
 
   ngOnInit() {
     for (let i = 1; i <= 8; i++) {
-      this.imgArray.push(`/images/img${i}.webp`);
+      this.imgArray.push(`https://picsum.photos/id/${i}/800/800`);
     }
   }
 

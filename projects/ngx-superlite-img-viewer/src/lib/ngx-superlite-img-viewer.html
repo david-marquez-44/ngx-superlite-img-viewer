@@ -1,6 +1,8 @@
 <div class="superlite-viewer">
 
-  <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
+  <div class="superlite-viewer__stage">
+    <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
+  </div>
 
   <div class="superlite-viewer__controls">
     @if(hasMultiple()){
