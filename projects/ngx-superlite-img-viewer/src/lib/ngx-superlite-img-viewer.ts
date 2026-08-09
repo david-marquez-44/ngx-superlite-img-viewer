@@ -21,8 +21,22 @@ export class NgxSuperliteImgViewer {
   currentImage = computed(() => this.images()[this.currentIndexIntern()]);
   imageAlt = computed(() => `Imagen ${this.currentIndexIntern()} de ${this.imageslength()}`);
   hasMultiple = computed(() => this.imageslength() > 1);
+  private overflowUser = '';
 
   closed = output<void>();
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.overflowUser = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = this.overflowUser;
+    }
+  }
 
   next() {
     if (this.currentIndexIntern() < (this.imageslength() - 1)) this.currentIndexIntern.set(this.currentIndexIntern() + 1);
@@ -34,18 +48,37 @@ export class NgxSuperliteImgViewer {
     else this.currentIndexIntern.set(this.imageslength() - 1)
   }
 
-  download() {
+  async download() {
     if (isPlatformBrowser(this.platformId)) {
-      let currentImage = this.currentImage();
-      if (window.location.origin == new URL(currentImage).origin) {
-        let a = document.createElement('a');
-        document.appendChild(a);
+      const currentImage = this.currentImage();
+      if (window.location.origin == new URL(currentImage, window.location.origin).origin) {
+        const currentImageSplit = this.currentImage().split('/');
+        const currentImageName = currentImageSplit[currentImageSplit.length - 1]
+        const a = document.createElement('a');
+        document.body.appendChild(a);
         a.setAttribute('href', currentImage);
-        a.setAttribute('download', this.imageAlt());
+        a.setAttribute('download', currentImageName);
         a.click();
-        document.removeChild(a);
+        document.body.removeChild(a);
       } else {
-
+        try {
+          const response: Response = await fetch(this.currentImage());
+          if (!response.ok) throw new Error(`Response status: ${response.status}`);
+          const headerContentType = response.headers.get('Content-Type');
+          let imageExtension = 'jpg';
+          if (headerContentType) imageExtension = headerContentType.split('/')[1];
+          const blob = await response.blob();
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          document.body.appendChild(a);
+          a.setAttribute('href', blobUrl);
+          a.setAttribute('download', `image.${imageExtension}`);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobUrl)
+        } catch (error) {
+          console.error(`Error downloading the image ${error}`)
+        }
       }
     }
   }

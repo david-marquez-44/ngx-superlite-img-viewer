@@ -20,8 +20,8 @@ export class App {
   imgArray: string[] = [];
 
   ngOnInit() {
-    for (let i = 0; i < 20; i++) {
-      this.imgArray.push(`https://picsum.photos/id/${i}/800/800`);
+    for (let i = 1; i <= 8; i++) {
+      this.imgArray.push(`/images/img${i}.webp`);
     }
   }
 
