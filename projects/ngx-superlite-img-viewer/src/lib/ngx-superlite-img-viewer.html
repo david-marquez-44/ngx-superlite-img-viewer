@@ -4,6 +4,8 @@
     <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
   </div>
 
+  <span class="superlite-viewer__span" aria-live="polite" [aria-label]="imageAlt()">{{ imagePosition() }}</span>
+
   <div class="superlite-viewer__controls">
     @if(hasMultiple()){
       <button type="button" (click)="previous()" [title]="currentTexts().previous" [aria-label]="currentTexts().previous" class="superlite-viewer__control-btn">

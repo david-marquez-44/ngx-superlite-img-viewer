@@ -24,6 +24,7 @@ export class NgxSuperliteImgViewer {
   currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
   imageAlt = computed(() => `${this.currentTexts().image} ${this.currentIndexIntern() + 1} ${this.currentTexts().of} ${this.imageslength()}`);
   hasMultiple = computed(() => this.imageslength() > 1);
+  imagePosition = computed(() => `${this.currentIndexIntern() + 1}/${this.imageslength()}`);
   private overflowUser = '';
 
   closed = output<void>();
