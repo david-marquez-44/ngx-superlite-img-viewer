@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 import { isPlatformBrowser } from '@angular/common';
+import { VIEWER_TEXTS } from './i18n/i18n';
 
 @Component({
   selector: 'ngx-superlite-img-viewer',
@@ -21,6 +22,8 @@ export class NgxSuperliteImgViewer {
   currentImage = computed(() => this.images()[this.currentIndexIntern()]);
   imageAlt = computed(() => `Imagen ${this.currentIndexIntern()} de ${this.imageslength()}`);
   hasMultiple = computed(() => this.imageslength() > 1);
+  lang = input<'es' | 'en'>('en');
+  currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
   private overflowUser = '';
 
   closed = output<void>();

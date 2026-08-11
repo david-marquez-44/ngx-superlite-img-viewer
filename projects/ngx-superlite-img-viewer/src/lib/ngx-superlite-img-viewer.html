@@ -6,13 +6,13 @@
 
   <div class="superlite-viewer__controls">
     @if(hasMultiple()){
-      <button type="button" (click)="previous()" class="superlite-viewer__control-btn">
+      <button type="button" (click)="previous()" [title]="currentTexts().previous" [aria-label]="currentTexts().previous" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
       </button>
 
       <span class="superlite-viewer__vertical-line"></span>
 
-      <button type="button" (click)="next()" class="superlite-viewer__control-btn">
+      <button type="button" (click)="next()" [title]="currentTexts().next" [aria-label]="currentTexts().next" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
       </button>
 
@@ -20,14 +20,14 @@
     }
 
     @if(showDownloadButton()) {
-      <button type="button" (click)="download()" class="superlite-viewer__control-btn">
+      <button type="button" (click)="download()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
       </button>
 
       <span class="superlite-viewer__vertical-line"></span>
     }
 
-    <button type="button" (click)="onClosed()" class="superlite-viewer__control-btn">
+    <button type="button" (click)="onClosed()" [title]="currentTexts().close" [aria-label]="currentTexts().close" class="superlite-viewer__control-btn">
       <ngx-sliv-icon iconName="close"></ngx-sliv-icon>
     </button>
   </div>
