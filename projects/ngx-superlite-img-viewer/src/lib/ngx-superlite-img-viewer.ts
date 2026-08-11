@@ -20,7 +20,7 @@ export class NgxSuperliteImgViewer {
   currentIndexIntern = signal(0);
   syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
   currentImage = computed(() => this.images()[this.currentIndexIntern()]);
-  imageAlt = computed(() => `Imagen ${this.currentIndexIntern()} de ${this.imageslength()}`);
+  imageAlt = computed(() => `Imagen ${this.currentIndexIntern() + 1} de ${this.imageslength()}`);
   hasMultiple = computed(() => this.imageslength() > 1);
   lang = input<'es' | 'en'>('en');
   currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
