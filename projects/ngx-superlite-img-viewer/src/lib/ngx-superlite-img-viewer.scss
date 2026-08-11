@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: grid;
@@ -42,6 +42,7 @@
   padding: 20px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
 }
 
 .superlite-viewer__control-btn {
