@@ -1,9 +1,15 @@
-import { Component, computed, effect, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 import { isPlatformBrowser } from '@angular/common';
 import { VIEWER_TEXTS } from './i18n/i18n';
 
 @Component({
+  host: {
+    'tabindex': '-1',
+    '(keydown.arrowleft)': 'previous()',
+    '(keydown.arrowright)': 'next()',
+    '(keydown.escape)': 'onClosed()',
+  },
   selector: 'ngx-superlite-img-viewer',
   imports: [NgxSlivIcon],
   templateUrl: './ngx-superlite-img-viewer.html',
@@ -12,6 +18,7 @@ import { VIEWER_TEXTS } from './i18n/i18n';
 export class NgxSuperliteImgViewer {
 
   private platformId = inject(PLATFORM_ID);
+  private elementRef = inject(ElementRef);
 
   images = input.required<string[]>();
   imageIndex = input<number>(0);
@@ -31,6 +38,7 @@ export class NgxSuperliteImgViewer {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.elementRef.nativeElement.focus();
       this.overflowUser = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
     }
