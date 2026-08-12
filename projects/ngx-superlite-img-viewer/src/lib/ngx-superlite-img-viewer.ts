@@ -51,13 +51,11 @@ export class NgxSuperliteImgViewer {
   }
 
   next() {
-    if (this.currentIndexIntern() < (this.imageslength() - 1)) this.currentIndexIntern.set(this.currentIndexIntern() + 1);
-    else this.currentIndexIntern.set(0)
+    this.currentIndexIntern.set((this.currentIndexIntern() + 1) % this.imageslength());
   }
 
   previous() {
-    if (this.currentIndexIntern() > 0) this.currentIndexIntern.set(this.currentIndexIntern() - 1)
-    else this.currentIndexIntern.set(this.imageslength() - 1)
+    this.currentIndexIntern.set(((this.currentIndexIntern() - 1) + this.imageslength()) % this.imageslength());
   }
 
   async download() {
