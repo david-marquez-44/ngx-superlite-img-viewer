@@ -4,7 +4,9 @@
     <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
   </div>
 
-  <span class="superlite-viewer__span" aria-live="polite" [aria-label]="imageAlt()">{{ imagePosition() }}</span>
+  @if(hasMultiple()){
+    <span class="superlite-viewer__span" aria-live="polite" [aria-label]="imageAlt()">{{ imagePosition() }}</span>
+  }
 
   <div class="superlite-viewer__controls">
     @if(hasMultiple()){
