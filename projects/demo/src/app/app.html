@@ -1,11 +1,11 @@
-<h1>Demo</h1>
-<div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center;">
+<div style="display: flex; flex-direction: column; height: 100%; width: 100%; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif, Apple Color Emoji, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'">
 
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px;">
+  <h1>Demo <span style="background: linear-gradient(45deg,rgba(248, 28, 89, 1) 0%, rgba(249, 71, 241, 1) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">ngx-superlite-img-viewer</span></h1>
+
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr);">
     @for (image of imgArray; track $index; let index = $index) {
       <figure>
-        <img [src]="image" [alt]="index" (click)="openViewer(index)" [title]="index" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        <p>{{ index }}</p>
+        <img [src]="image" [alt]="index" (click)="openViewer(index)" [title]="'#' + (index + 1)" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px;">
       </figure>
     }
   </div>

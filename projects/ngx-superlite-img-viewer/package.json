@@ -1,6 +1,25 @@
 {
   "name": "ngx-superlite-img-viewer",
   "version": "0.0.1",
+  "description": "Ultralight image viewer for Angular.",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "image-viewer",
+    "lightbox",
+    "gallery",
+    "lightweight",
+    "signals"
+  ],
+  "author": "David Marquez",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/david-marquez-44/ngx-superlite-img-viewer"
+  },
+  "homepage": "https://github.com/david-marquez-44/ngx-superlite-img-viewer#readme",
+  "bugs": {
+    "url": "https://github.com/david-marquez-44/ngx-superlite-img-viewer/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0"

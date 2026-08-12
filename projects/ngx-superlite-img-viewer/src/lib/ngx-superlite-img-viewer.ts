@@ -20,21 +20,25 @@ export class NgxSuperliteImgViewer {
   private platformId = inject(PLATFORM_ID);
   private elementRef = inject(ElementRef);
 
-  images = input.required<string[]>();
-  imageIndex = input<number>(0);
-  imageslength = computed<number>(() => this.images().length)
-  showDownloadButton = input<boolean>(true);
-  currentIndexIntern = signal(0);
-  syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
-  currentImage = computed(() => this.images()[this.currentIndexIntern()]);
-  lang = input<'es' | 'en'>('en');
-  currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
-  imageAlt = computed(() => `${this.currentTexts().image} ${this.currentIndexIntern() + 1} ${this.currentTexts().of} ${this.imageslength()}`);
-  hasMultiple = computed(() => this.imageslength() > 1);
-  imagePosition = computed(() => `${this.currentIndexIntern() + 1}/${this.imageslength()}`);
+  public images = input.required<string[]>();
+  public imageIndex = input<number>(0);
+  public showDownloadButton = input<boolean>(true);
+  public lang = input<'es' | 'en'>('en');
+
+  public closed = output<void>();
+
+  private currentIndexIntern = signal(0);
+  private syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
   private overflowUser = '';
 
-  closed = output<void>();
+  private imageslength = computed(() => this.images().length)
+  public currentImage = computed(() => this.images()[this.currentIndexIntern()]);
+  public currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
+  public imageAlt = computed(() => `${this.currentTexts().image} ${this.currentIndexIntern() + 1} ${this.currentTexts().of} ${this.imageslength()}`);
+  public hasMultiple = computed(() => this.imageslength() > 1);
+  public imagePosition = computed(() => `${this.currentIndexIntern() + 1}/${this.imageslength()}`);
+
+
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {

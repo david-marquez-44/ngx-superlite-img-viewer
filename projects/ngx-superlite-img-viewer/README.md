@@ -1,64 +1,126 @@
-# NgxSuperliteImgViewer
+# ngx-superlite-img-viewer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+![npm version](https://img.shields.io/npm/v/ngx-superlite-img-viewer)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/ngx-superlite-img-viewer)
+![Angular](https://img.shields.io/badge/Angular-21+-red)
+![License](https://img.shields.io/npm/l/ngx-superlite-img-viewer)
 
-## Code scaffolding
+## Sobre ngx-superlite-img-viewer
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Librería ultraligera para Angular diseñada para visualizar galerías de imágenes en un visor rápido e intuitivo. Incluye navegación fluida, descarga directa y control de cierre.
+
+## Instalación
 
 ```bash
-ng generate component component-name
+npm install ngx-superlite-img-viewer
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Descripción
+
+`ngx-superlite-img-viewer` es un componente standalone pensado para abrir una imagen o una colección de imágenes en una vista modal estilo lightbox. Fue diseñado para ser simple, visualmente limpio y fácil de integrar en cualquier app Angular.
+
+- **Visor modal centrado**: presentación limpia enfocada en el contenido visual.
+- **Navegación fluida** entre imágenes mediante controles en pantalla o atajos de teclado (`←`, `→`, `Esc`).
+- **Soporte de idiomas**: `es` y `en`.
+- **Botón de descarga** opcional, compatible con imágenes del mismo dominio y con recursos externos (cross-origin).
+- **Bloqueo automático del scroll** del `body` mientras el visor está abierto.
+- **Accesible**: `aria-label`, `aria-live`, `aria-hidden` y foco de teclado gestionados internamente.
+
+## Superlite de verdad
+
+- Package size: **3.23 kB** (minified + gzipped).
+- Cero dependencias externas.
+
+## Uso básico
+
+```ts
+import { Component } from '@angular/core';
+import { NgxSuperliteImgViewer } from 'ngx-superlite-img-viewer';
+
+@Component({
+  selector: 'app-demo',
+  standalone: true,
+  imports: [NgxSuperliteImgViewer],
+  template: `
+    <button type="button" (click)="isOpen = true">Abrir visor</button>
+
+    @if (isOpen) {
+      <ngx-superlite-img-viewer
+        [images]="images"
+        [imageIndex]="0"
+        [showDownloadButton]="true"
+        [lang]="'es'"
+        (closed)="isOpen = false"
+      />
+    }
+  `,
+})
+export class DemoComponent {
+  isOpen = false;
+
+  images = [
+    'https://picsum.photos/id/1/200/300',
+    'https://picsum.photos/id/2/200/300',
+    'https://picsum.photos/id/3/200/300',
+    'https://picsum.photos/id/4/200/300',
+  ];
+}
+```
+
+## API
+
+### Inputs
+
+| Nombre | Tipo | Default | Descripción |
+| --- | --- | --- | --- |
+| `images` | `string[]` | requerido | Lista de URLs de las imágenes a mostrar. |
+| `imageIndex` | `number` | `0` | Índice de la imagen activa al abrir el visor. |
+| `showDownloadButton` | `boolean` | `true` | Muestra u oculta el botón de descarga. |
+| `lang` | `'es' \| 'en'` | `'en'` | Idioma de los textos del visor. |
+
+### Output
+
+| Nombre | Tipo | Descripción |
+| --- | --- | --- |
+| `closed` | `void` | Se emite cuando el usuario cierra el visor (botón de cerrar o tecla `Escape`). |
+
+## Comportamiento con teclado
+
+| Tecla | Acción |
+| --- | --- |
+| `←` | Navega a la imagen anterior. |
+| `→` | Navega a la imagen siguiente. |
+| `Escape` | Cierra el visor. |
+
+## Descarga de imágenes
+
+El botón de descarga funciona sin importar el origen de la imagen:
+
+- **Mismo dominio que la app**: la descarga se dispara directamente mediante un enlace temporal.
+- **Dominio externo** (por ejemplo, una API o un CDN): la imagen se obtiene primero con `fetch`, se convierte a un blob local y luego se descarga, evitando las restricciones del navegador para descargas cross-origin.
+
+Si la descarga falla por cualquier motivo (red, CORS, recurso no disponible), el error se registra en la consola sin interrumpir la aplicación.
+
+## Requisitos
+
+- Angular 21+.
+- Navegador compatible con `fetch`, `URL.createObjectURL` y APIs estándar del DOM.
+
+## Desarrollo
+
+Para arrancar la app de demo del proyecto:
 
 ```bash
-ng generate --help
+npm install
+ng serve demo
 ```
 
-## Building
-
-To build the library, run:
+Para compilar la librería:
 
 ```bash
 ng build ngx-superlite-img-viewer
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Licencia
 
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/ngx-superlite-img-viewer
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[MIT](./LICENSE)
