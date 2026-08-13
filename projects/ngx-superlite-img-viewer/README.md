@@ -9,6 +9,10 @@
 
 Librería ultraligera para Angular diseñada para visualizar galerías de imágenes en un visor rápido e intuitivo. Incluye navegación fluida, descarga directa y control de cierre.
 
+## Demo
+
+[Abrir Demo](https://david-marquez-44.github.io/ngx-superlite-img-viewer/)
+
 ## Instalación
 
 ```bash
