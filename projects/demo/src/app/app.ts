@@ -17,10 +17,18 @@ export class App {
     this.indexImg.set(index);
   }
 
+  goToGallery(event: Event) {
+    event.preventDefault();
+    document.getElementById('gallery')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   imgArray: string[] = [];
 
   ngOnInit() {
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 8; i++) {
       this.imgArray.push(`https://picsum.photos/id/${i}/800/800`);
     }
   }

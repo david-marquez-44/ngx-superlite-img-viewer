@@ -1,17 +1,42 @@
-<div style="display: flex; flex-direction: column; height: 100%; width: 100%; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif, Apple Color Emoji, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'">
+<main class="apple-demo">
+  <header class="hero">
+    <div class="hero__content">
+      <h1>
+        Demo
+        <span>ngx-superlite-img-viewer</span>
+      </h1>
+      <p class="subtitle">
+        Ligero, fluido y pensado para destacar cada imagen sin distracciones.
+      </p>
+      <div class="hero__actions">
+        <a class="cta cta--primary" href="#gallery" (click)="goToGallery($event)">Ver galeria</a>
+      </div>
+    </div>
 
-  <h1>Demo <span style="background: linear-gradient(45deg,rgba(248, 28, 89, 1) 0%, rgba(249, 71, 241, 1) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">ngx-superlite-img-viewer</span></h1>
+    <div class="hero__visual" aria-label="Featured product preview">
+      <div class="glass-panel">
+         <i class="fa-solid fa-feather"></i>
+      </div>
+    </div>
+  </header>
 
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr);">
-    @for (image of imgArray; track $index; let index = $index) {
-      <figure>
-        <img [src]="image" [alt]="index" (click)="openViewer(index)" [title]="'#' + (index + 1)" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px;">
-      </figure>
-    }
-  </div>
+  <section id="gallery" class="gallery" aria-label="Image gallery preview">
+    <div class="gallery__header">
+      <p>Galeria</p>
+      <span>{{ imgArray.length }} imagenes</span>
+    </div>
+
+    <div class="gallery__grid">
+      @for (image of imgArray; track $index; let index = $index) {
+        <figure class="gallery__item" (click)="openViewer(index)" [attr.aria-label]="'Open image ' + (index + 1)">
+          <img [src]="image" [alt]="'Sample image ' + (index + 1)" [title]="'#' + (index + 1)" />
+          <figcaption>#{{ index + 1 }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
 
   @if (isOpenViewer()) {
     <ngx-superlite-img-viewer [images]="imgArray" [imageIndex]="indexImg()" (closed)="closeViewer()"></ngx-superlite-img-viewer>
   }
-
-</div>
+</main>
