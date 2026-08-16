@@ -24,7 +24,7 @@
     }
 
     @if(showDownloadButton()) {
-      <button type="button" (click)="download()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
+      <button type="button" (click)="download()" [disabled]="disabledDownloadButton()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
       </button>
 

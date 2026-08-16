@@ -29,6 +29,7 @@ export class NgxSuperliteImgViewer {
 
   private currentIndexIntern = signal(0);
   private syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
+  public disabledDownloadButton = signal(false);
   private overflowUser = '';
 
   private imageslength = computed(() => this.images().length)
@@ -63,6 +64,7 @@ export class NgxSuperliteImgViewer {
   }
 
   async download() {
+    this.disabledDownloadButton.set(true);
     if (isPlatformBrowser(this.platformId)) {
       const currentImage = this.currentImage();
       if (window.location.origin == new URL(currentImage, window.location.origin).origin) {
@@ -95,6 +97,7 @@ export class NgxSuperliteImgViewer {
         }
       }
     }
+    setTimeout(() => this.disabledDownloadButton.set(false), 1000);
   }
 
   onClosed() {
