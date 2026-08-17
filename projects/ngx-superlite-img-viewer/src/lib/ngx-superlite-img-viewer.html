@@ -1,7 +1,8 @@
 <div class="superlite-viewer">
 
   <div class="superlite-viewer__stage">
-    <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
+    <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" [src]="currentImage()" [alt]="imageAlt()">
+    <ngx-sliv-loader [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
   </div>
 
   @if(hasMultiple()){
