@@ -44,10 +44,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.85);
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+  transition: transform .5s;
 }
 
 .superlite-viewer__control-btn {
@@ -57,13 +57,17 @@
   border: none;
   color: white;
   background-color: transparent;
+  padding: 20px 25px;
+}
+
+.superlite-viewer__control-btn:hover {
+  transform: scale(1.15);
 }
 
 .superlite-viewer__vertical-line {
   display: inline-block;
   border-left: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 0 20px;
-  height: 80%;
+  height: 35%;
 }
 
 .hidden-element {
