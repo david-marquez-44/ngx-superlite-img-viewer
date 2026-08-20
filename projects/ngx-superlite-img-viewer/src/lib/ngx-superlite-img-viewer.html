@@ -1,7 +1,8 @@
 <div class="superlite-viewer">
 
   <div class="superlite-viewer__stage">
-    <img class="superlite-viewer__img" [src]="currentImage()" [alt]="imageAlt()">
+    <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" [src]="currentImage()" [alt]="imageAlt()">
+    <ngx-sliv-loader [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
   </div>
 
   @if(hasMultiple()){
@@ -24,7 +25,7 @@
     }
 
     @if(showDownloadButton()) {
-      <button type="button" (click)="download()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
+      <button type="button" (click)="download()" [disabled]="disabledDownloadButton()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
         <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
       </button>
 

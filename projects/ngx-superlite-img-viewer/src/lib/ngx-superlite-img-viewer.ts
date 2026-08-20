@@ -1,5 +1,6 @@
 import { Component, computed, effect, ElementRef, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
+import { NgxSlivLoader } from './components/ngx-sliv-loader/ngx-sliv-loader';
 import { isPlatformBrowser } from '@angular/common';
 import { VIEWER_TEXTS } from './i18n/i18n';
 
@@ -11,7 +12,7 @@ import { VIEWER_TEXTS } from './i18n/i18n';
     '(keydown.escape)': 'onClosed()',
   },
   selector: 'ngx-superlite-img-viewer',
-  imports: [NgxSlivIcon],
+  imports: [NgxSlivIcon, NgxSlivLoader],
   templateUrl: './ngx-superlite-img-viewer.html',
   styleUrl: './ngx-superlite-img-viewer.scss',
 })
@@ -29,6 +30,14 @@ export class NgxSuperliteImgViewer {
 
   private currentIndexIntern = signal(0);
   private syncCurrentIndexIntern = effect(() => this.currentIndexIntern.set(this.imageIndex()));
+  public disabledDownloadButton = signal(false);
+  private setTimeoutIDImageIsLoading?: number;
+  public imageIsLoading = signal(false);
+  private resetImageIsLoading = effect(() => {
+    this.currentIndexIntern();
+    this.clearTimeoutIDImageIsLoading();
+    this.setTimeoutIDImageIsLoading = setTimeout(() => this.imageIsLoading.set(true), 120);
+  });
   private overflowUser = '';
 
   private imageslength = computed(() => this.images().length)
@@ -52,6 +61,7 @@ export class NgxSuperliteImgViewer {
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = this.overflowUser;
     }
+    this.clearTimeoutIDImageIsLoading();
   }
 
   next() {
@@ -63,6 +73,7 @@ export class NgxSuperliteImgViewer {
   }
 
   async download() {
+    this.disabledDownloadButton.set(true);
     if (isPlatformBrowser(this.platformId)) {
       const currentImage = this.currentImage();
       if (window.location.origin == new URL(currentImage, window.location.origin).origin) {
@@ -95,9 +106,20 @@ export class NgxSuperliteImgViewer {
         }
       }
     }
+    setTimeout(() => this.disabledDownloadButton.set(false), 1000);
   }
 
   onClosed() {
     this.closed.emit();
   }
+
+  imageIsRendered() {
+    this.clearTimeoutIDImageIsLoading();
+    this.imageIsLoading.set(false);
+  }
+
+  clearTimeoutIDImageIsLoading() {
+    if (this.setTimeoutIDImageIsLoading) clearTimeout(this.setTimeoutIDImageIsLoading);
+  }
+
 }
