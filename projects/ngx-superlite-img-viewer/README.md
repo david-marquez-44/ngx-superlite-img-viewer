@@ -25,14 +25,17 @@ npm install ngx-superlite-img-viewer
 
 - **Visor modal centrado**: presentación limpia enfocada en el contenido visual.
 - **Navegación fluida** entre imágenes mediante controles en pantalla o atajos de teclado (`←`, `→`, `Esc`).
-- **Soporte de idiomas**: `es` y `en`.
-- **Botón de descarga** opcional, compatible con imágenes del mismo dominio y con recursos externos (cross-origin).
+- **Indicador de carga**: mientras cada imagen se renderiza, se muestra un loader; el estado se gestiona con un pequeño retraso interno para evitar parpadeos en cargas instantáneas (caché o red rápida).
+- **Manejo de errores de carga**: si una imagen falla en cargar, se muestra un ícono y un mensaje de error en su lugar, sin romper la navegación del resto de la galería.
+- **Soporte de idiomas**: `es` y `en`, incluyendo los mensajes de error y el contador de imágenes.
+- **Botón de descarga** opcional, compatible con imágenes del mismo dominio y con recursos externos (cross-origin), con estado deshabilitado mientras la descarga está en proceso.
+- **Estados de interacción** (hover) en los controles para mejor feedback visual.
 - **Bloqueo automático del scroll** del `body` mientras el visor está abierto.
 - **Accesible**: `aria-label`, `aria-live`, `aria-hidden` y foco de teclado gestionados internamente.
 
 ## Superlite de verdad
 
-- Package size: **3.23 kB** (minified + gzipped).
+- Package size: **< 4.0 kB** (minified + gzipped).
 - Cero dependencias externas.
 
 ## Uso básico
@@ -96,9 +99,13 @@ export class DemoComponent {
 | `→` | Navega a la imagen siguiente. |
 | `Escape` | Cierra el visor. |
 
+## Renderizado de imágenes
+
+Mientras cada imagen se renderiza, el visor muestra un indicador de carga. Si la imagen falla (URL rota, error de red, recurso no disponible), se reemplaza por un mensaje de error con un ícono, sin afectar la navegación hacia otras imágenes de la galería. Ambos estados se reinician automáticamente al cambiar de imagen.
+
 ## Descarga de imágenes
 
-El botón de descarga funciona sin importar el origen de la imagen:
+El botón de descarga funciona sin importar el origen de la imagen, y se deshabilita brevemente al hacer clic para evitar doble clic accidental:
 
 - **Mismo dominio que la app**: la descarga se dispara directamente mediante un enlace temporal.
 - **Dominio externo** (por ejemplo, una API o un CDN): la imagen se obtiene primero con `fetch`, se convierte a un blob local y luego se descarga, evitando las restricciones del navegador para descargas cross-origin.
