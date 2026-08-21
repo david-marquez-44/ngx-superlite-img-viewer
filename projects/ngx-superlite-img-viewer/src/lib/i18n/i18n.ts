@@ -6,6 +6,8 @@ export const VIEWER_TEXTS = {
     next: 'Imagen siguiente',
     download: 'Descargar imagen',
     close: 'Cerrar visor',
+    loading: 'Cargando imagen',
+    error: 'Error al cargar la imagen'
   },
   en: {
     image: 'Image',
@@ -14,5 +16,7 @@ export const VIEWER_TEXTS = {
     next: 'Next image',
     download: 'Download image',
     close: 'Close viewer',
+    loading: 'Loading image',
+    error: 'Error loading image'
   },
 };

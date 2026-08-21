@@ -1,8 +1,13 @@
 <div class="superlite-viewer">
 
   <div class="superlite-viewer__stage">
-    <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" [src]="currentImage()" [alt]="imageAlt()">
-    <ngx-sliv-loader [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
+    @if(imageLoadIsError()){
+      <ngx-sliv-icon iconName="error"></ngx-sliv-icon>
+      <h2 class="superlite-viewer__text-error">{{ currentTexts().error }}</h2>
+    } @else {
+      <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" (error)="errorLoadingImage()" [src]="currentImage()" [alt]="imageAlt()">
+      <ngx-sliv-loader [aria-label]="currentTexts().loading" [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
+    }
   </div>
 
   @if(hasMultiple()){
