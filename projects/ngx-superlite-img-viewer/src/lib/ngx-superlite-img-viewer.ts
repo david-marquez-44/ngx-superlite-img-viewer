@@ -39,6 +39,11 @@ export class NgxSuperliteImgViewer {
     this.setTimeoutIDImageIsLoading = setTimeout(() => this.imageIsLoading.set(true), 120);
   });
   private overflowUser = '';
+  public imageLoadIsError = signal(false);
+  private resetHasError = effect(() => {
+    this.currentIndexIntern();
+    this.imageLoadIsError.set(false);
+  });
 
   private imageslength = computed(() => this.images().length)
   public currentImage = computed(() => this.images()[this.currentIndexIntern()]);
@@ -46,8 +51,6 @@ export class NgxSuperliteImgViewer {
   public imageAlt = computed(() => `${this.currentTexts().image} ${this.currentIndexIntern() + 1} ${this.currentTexts().of} ${this.imageslength()}`);
   public hasMultiple = computed(() => this.imageslength() > 1);
   public imagePosition = computed(() => `${this.currentIndexIntern() + 1}/${this.imageslength()}`);
-
-
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -116,6 +119,10 @@ export class NgxSuperliteImgViewer {
   imageIsRendered() {
     this.clearTimeoutIDImageIsLoading();
     this.imageIsLoading.set(false);
+  }
+
+  errorLoadingImage() {
+    this.imageLoadIsError.set(true);
   }
 
   clearTimeoutIDImageIsLoading() {

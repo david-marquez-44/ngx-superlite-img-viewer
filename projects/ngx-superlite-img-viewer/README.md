@@ -125,6 +125,14 @@ Para compilar la librería:
 ng build ngx-superlite-img-viewer
 ```
 
+Para ejecutar las pruebas unitarias de la librería, sitúate en la raíz del proyecto, donde están `angular.json` y `package.json`, y ejecuta:
+
+```bash
+npx ng test ngx-superlite-img-viewer --no-watch
+```
+
+Este comando ejecuta las pruebas una sola vez y finaliza al terminar.
+
 ## Licencia
 
 [MIT](./LICENSE)
