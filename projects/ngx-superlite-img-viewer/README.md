@@ -27,6 +27,7 @@ npm install ngx-superlite-img-viewer
 - **Navegación fluida** entre imágenes mediante controles en pantalla o atajos de teclado (`←`, `→`, `Esc`).
 - **Indicador de carga**: mientras cada imagen se renderiza, se muestra un loader; el estado se gestiona con un pequeño retraso interno para evitar parpadeos en cargas instantáneas (caché o red rápida).
 - **Manejo de errores de carga**: si una imagen falla en cargar, se muestra un ícono y un mensaje de error en su lugar, sin romper la navegación del resto de la galería.
+- **Manejo de entradas vacías**: Si el array `images` recibido está vacío, el visor muestra un mensaje indicando que no hay imágenes disponibles, junto con un botón para cerrar. El componente nunca queda en un estado roto o visualmente vacío sin explicación.
 - **Soporte de idiomas**: `es` y `en`, incluyendo los mensajes de error y el contador de imágenes.
 - **Botón de descarga** opcional, compatible con imágenes del mismo dominio y con recursos externos (cross-origin), con estado deshabilitado mientras la descarga está en proceso.
 - **Estados de interacción** (hover) en los controles para mejor feedback visual.
