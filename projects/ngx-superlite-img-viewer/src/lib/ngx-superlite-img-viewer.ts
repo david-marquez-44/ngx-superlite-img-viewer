@@ -39,13 +39,13 @@ export class NgxSuperliteImgViewer {
     this.setTimeoutIDImageIsLoading = setTimeout(() => this.imageIsLoading.set(true), 120);
   });
   private overflowUser = '';
-  public imageLoadIsError = signal(false);
+  public hasError = signal(false);
   private resetHasError = effect(() => {
     this.currentIndexIntern();
-    this.imageLoadIsError.set(false);
+    this.hasError.set(false);
   });
 
-  private imageslength = computed(() => this.images().length)
+  public imageslength = computed(() => this.images().length)
   public currentImage = computed(() => this.images()[this.currentIndexIntern()]);
   public currentTexts = computed(() => VIEWER_TEXTS[this.lang()])
   public imageAlt = computed(() => `${this.currentTexts().image} ${this.currentIndexIntern() + 1} ${this.currentTexts().of} ${this.imageslength()}`);
@@ -122,7 +122,7 @@ export class NgxSuperliteImgViewer {
   }
 
   errorLoadingImage() {
-    this.imageLoadIsError.set(true);
+    this.hasError.set(true);
   }
 
   clearTimeoutIDImageIsLoading() {

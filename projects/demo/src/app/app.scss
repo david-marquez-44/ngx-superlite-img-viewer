@@ -23,6 +23,47 @@ img {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', sans-serif;
 }
 
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: min(1280px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 18px 0 0;
+}
+
+.topbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(29, 29, 31, 0.1);
+  border-radius: 999px;
+  color: #1d1d1f;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.topbar__link:hover {
+  border-color: rgba(29, 29, 31, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+}
+
+.topbar__link:focus-visible {
+  outline: 3px solid rgba(126, 45, 255, 0.35);
+  outline-offset: 3px;
+}
+
+.topbar__icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -213,6 +254,15 @@ img {
   .apple-demo {
     width: min(100% - 20px, 1280px);
     padding-top: 28px;
+  }
+
+  .topbar {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .topbar__link {
+    padding: 0 10px;
   }
 
   .gallery__grid {

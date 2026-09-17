@@ -1,45 +1,50 @@
 <div class="superlite-viewer">
 
-  <div class="superlite-viewer__stage">
-    @if(imageLoadIsError()){
-      <ngx-sliv-icon iconName="error"></ngx-sliv-icon>
-      <h2 class="superlite-viewer__text-error">{{ currentTexts().error }}</h2>
-    } @else {
-      <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" (error)="errorLoadingImage()" [src]="currentImage()" [alt]="imageAlt()">
-      <ngx-sliv-loader [aria-label]="currentTexts().loading" [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
-    }
-  </div>
+  @if(imageslength() > 0){
+    <div class="superlite-viewer__stage">
+      @if(hasError()){
+        <ngx-sliv-icon iconName="error"></ngx-sliv-icon>
+        <h2 class="superlite-viewer__text-error" aria-live="polite">{{ currentTexts().error }}</h2>
+      } @else {
+        <img class="superlite-viewer__img" [class.hidden-element]="imageIsLoading()" (load)="imageIsRendered()" (error)="errorLoadingImage()" [src]="currentImage()" [alt]="imageAlt()">
+        <ngx-sliv-loader [aria-label]="currentTexts().loading" [class.hidden-element]="!imageIsLoading()"></ngx-sliv-loader>
+      }
+    </div>
 
-  @if(hasMultiple()){
-    <span class="superlite-viewer__span" aria-live="polite" [aria-label]="imageAlt()">{{ imagePosition() }}</span>
-  }
-
-  <div class="superlite-viewer__controls">
     @if(hasMultiple()){
-      <button type="button" (click)="previous()" [title]="currentTexts().previous" [aria-label]="currentTexts().previous" class="superlite-viewer__control-btn">
-        <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
-      </button>
-
-      <span class="superlite-viewer__vertical-line"></span>
-
-      <button type="button" (click)="next()" [title]="currentTexts().next" [aria-label]="currentTexts().next" class="superlite-viewer__control-btn">
-        <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
-      </button>
-
-      <span class="superlite-viewer__vertical-line"></span>
+      <span class="superlite-viewer__span" aria-live="polite" [aria-label]="imageAlt()">{{ imagePosition() }}</span>
     }
 
-    @if(showDownloadButton()) {
-      <button type="button" (click)="download()" [disabled]="disabledDownloadButton()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
-        <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
+    <div class="superlite-viewer__controls">
+      @if(hasMultiple()){
+        <button type="button" (click)="previous()" [title]="currentTexts().previous" [aria-label]="currentTexts().previous" class="superlite-viewer__control-btn">
+          <ngx-sliv-icon iconName="previous"></ngx-sliv-icon>
+        </button>
+
+        <span class="superlite-viewer__vertical-line"></span>
+
+        <button type="button" (click)="next()" [title]="currentTexts().next" [aria-label]="currentTexts().next" class="superlite-viewer__control-btn">
+          <ngx-sliv-icon iconName="next"></ngx-sliv-icon>
+        </button>
+
+        <span class="superlite-viewer__vertical-line"></span>
+      }
+
+      @if(showDownloadButton()) {
+        <button type="button" (click)="download()" [disabled]="disabledDownloadButton()" [title]="currentTexts().download" [aria-label]="currentTexts().download" class="superlite-viewer__control-btn">
+          <ngx-sliv-icon iconName="download"></ngx-sliv-icon>
+        </button>
+
+        <span class="superlite-viewer__vertical-line"></span>
+      }
+
+      <button type="button" (click)="onClosed()" [title]="currentTexts().close" [aria-label]="currentTexts().close" class="superlite-viewer__control-btn">
+        <ngx-sliv-icon iconName="close"></ngx-sliv-icon>
       </button>
-
-      <span class="superlite-viewer__vertical-line"></span>
-    }
-
-    <button type="button" (click)="onClosed()" [title]="currentTexts().close" [aria-label]="currentTexts().close" class="superlite-viewer__control-btn">
-      <ngx-sliv-icon iconName="close"></ngx-sliv-icon>
-    </button>
-  </div>
+    </div>
+  }@else{
+    <h2 class="superlite-viewer__text-error">{{ currentTexts().noImage }}</h2>
+    <button class="superlite-viewer__exit-btn" type="button" (click)="onClosed()" [title]="currentTexts().close">{{currentTexts().close}}</button>
+  }
 
 </div>
