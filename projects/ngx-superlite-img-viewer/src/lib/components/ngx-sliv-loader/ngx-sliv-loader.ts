@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'ngx-sliv-loader',
   imports: [],
   template: `
@@ -9,5 +10,6 @@ import { Component } from '@angular/core';
   </svg>
   `,
   styleUrl: './ngx-sliv-loader.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxSlivLoader { }

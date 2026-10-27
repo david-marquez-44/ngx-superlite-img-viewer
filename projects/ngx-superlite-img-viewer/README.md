@@ -2,7 +2,7 @@
 
 ![npm version](https://img.shields.io/npm/v/ngx-superlite-img-viewer)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/ngx-superlite-img-viewer)
-![Angular](https://img.shields.io/badge/Angular-21+-red)
+![Angular](https://img.shields.io/badge/Angular-19+-red)
 ![License](https://img.shields.io/npm/l/ngx-superlite-img-viewer)
 
 ## Sobre ngx-superlite-img-viewer
@@ -115,7 +115,7 @@ Si la descarga falla por cualquier motivo (red, CORS, recurso no disponible), el
 
 ## Requisitos
 
-- Angular 21+.
+- Angular 19+.
 - Navegador compatible con `fetch`, `URL.createObjectURL` y APIs estándar del DOM.
 
 ## Desarrollo
