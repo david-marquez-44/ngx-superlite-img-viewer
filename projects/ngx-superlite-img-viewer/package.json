@@ -21,8 +21,8 @@
     "url": "https://github.com/david-marquez-44/ngx-superlite-img-viewer/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^21.2.0",
-    "@angular/core": "^21.2.0"
+    "@angular/common": "^19.0.0 || ^20.0.0 || ^21.0.0",
+    "@angular/core": "^19.0.0 || ^20.0.0 || ^21.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
