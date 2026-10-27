@@ -1,10 +1,11 @@
-import { Component, computed, effect, ElementRef, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, output, PLATFORM_ID, signal } from '@angular/core';
 import { NgxSlivIcon } from './components/ngx-sliv-icon/ngx-sliv-icon';
 import { NgxSlivLoader } from './components/ngx-sliv-loader/ngx-sliv-loader';
 import { isPlatformBrowser } from '@angular/common';
 import { VIEWER_TEXTS } from './i18n/i18n';
 
 @Component({
+  standalone: true,
   host: {
     'tabindex': '-1',
     '(keydown.arrowleft)': 'previous()',
@@ -15,6 +16,7 @@ import { VIEWER_TEXTS } from './i18n/i18n';
   imports: [NgxSlivIcon, NgxSlivLoader],
   templateUrl: './ngx-superlite-img-viewer.html',
   styleUrl: './ngx-superlite-img-viewer.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxSuperliteImgViewer {
 

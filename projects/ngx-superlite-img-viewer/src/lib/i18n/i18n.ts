@@ -8,7 +8,7 @@ export const VIEWER_TEXTS = {
     close: 'Cerrar visor',
     loading: 'Cargando imagen',
     error: 'Error al cargar la imagen',
-    noImage: 'Sin imagenes para mostrar'
+    noImage: 'Sin imágenes para mostrar'
   },
   en: {
     image: 'Image',
